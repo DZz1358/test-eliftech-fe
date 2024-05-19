@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="head-wrapper">
+    <h1>Events</h1>
+    <button [routerLink]="['/add-event']">Add event</button>
+  </div>
+
+  <ng-container *ngIf="!loading">
+    <div class="card-wrapper">
+      <div *ngFor="let item of eventsOnPage" class="card">
+        <div class="card-info">
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.description }}</p>
+          <p>{{ item.author ? item.author : "-" }}</p>
+          <p>{{ item.createdAt | date : "EEEE, MMMM d, y" }}</p>
+        </div>
+        <div class="card-footer">
+          <button (click)="registerOnEvent(item._id)">Register</button>
+          <button [routerLink]="['/view/' + item._id]">View</button>
+        </div>
+      </div>
+    </div>
+
+    <app-paginator
+      [currentPage]="currentPage"
+      [totalPages]="totalPages"
+      (prevPage)="prevPage()"
+      (nextPage)="nextPage()"
+    ></app-paginator>
+  </ng-container>
+
+  <ng-container *ngIf="loading">
+    <div class="loader-wrapper">
+      <div class="loader"></div>
+    </div>
+  </ng-container>
+</div>

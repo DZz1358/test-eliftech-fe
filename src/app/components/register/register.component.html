@@ -1,0 +1,105 @@
+<div class="container">
+  <div class="head-wrapper">
+    <h1>Events</h1>
+    <button [routerLink]="['/dashboard']">Back</button>
+  </div>
+
+  <div class="form-container">
+    <form class="form" (ngSubmit)="onSubmit()" [formGroup]="myForm">
+      <div class="input-wrapper">
+        <label for="name">Name</label>
+        <input
+          formControlName="name"
+          id="name"
+          type="text"
+          [ngClass]="{ 'is-invalid': myForm.controls['name'].invalid }"
+        />
+
+        <div
+          *ngIf="
+            myForm.controls['name'].invalid &&
+            (myForm.controls['name'].dirty || myForm.controls['name'].touched)
+          "
+        >
+          <small
+            [ngClass]="{ 'is-invalid': myForm.controls['name'].invalid }"
+            *ngIf="myForm.controls['name'].errors?.['required']"
+            >Name is required.</small
+          >
+          <small
+            [ngClass]="{ 'is-invalid': myForm.controls['name'].invalid }"
+            *ngIf="myForm.controls['name'].errors?.['minlength']"
+            >Name must be at least 3 characters long.</small
+          >
+        </div>
+      </div>
+
+      <div class="input-wrapper">
+        <label for="email">Email</label>
+        <input formControlName="email" id="email" type="email" />
+
+        <div
+          *ngIf="
+            myForm.controls['email'].invalid &&
+            (myForm.controls['email'].dirty || myForm.controls['email'].touched)
+          "
+        >
+          <small
+            [ngClass]="{ 'is-invalid': myForm.controls['email'].invalid }"
+            *ngIf="myForm.controls['email'].errors?.['required']"
+            >Email is required or not correct.</small
+          >
+        </div>
+      </div>
+
+      <div class="input-wrapper">
+        <label for="date">Date</label>
+        <input formControlName="date" id="email" type="date" />
+
+        <div
+          *ngIf="
+            myForm.controls['date'].invalid &&
+            (myForm.controls['date'].dirty || myForm.controls['date'].touched)
+          "
+        >
+          <small
+            [ngClass]="{ 'is-invalid': myForm.controls['date'].invalid }"
+            *ngIf="myForm.controls['date'].errors?.['required']"
+            >Date is required.</small
+          >
+        </div>
+      </div>
+
+      <div class="button-wrapper">
+        <label>
+          <input
+            type="radio"
+            formControlName="selection"
+            [value]="'isSocial'"
+          />
+          Social
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            formControlName="selection"
+            [value]="'isFriends'"
+          />
+          Friends
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            formControlName="selection"
+            [value]="'isMyself'"
+          />
+          Myself
+        </label>
+      </div>
+
+      <button [disabled]="myForm.invalid" type="submit">Create</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,111 @@
+<div class="container">
+  <div class="head-wrapper">
+    <h1>Events</h1>
+    <button [routerLink]="['/dashboard']">Back</button>
+  </div>
+
+  <div class="form-container">
+    <form class="form" (ngSubmit)="onSubmit()" [formGroup]="myForm">
+      <div class="input-wrapper">
+        <label for="title">Title</label>
+        <input
+          formControlName="title"
+          id="title"
+          type="text"
+          [ngClass]="{ 'is-invalid': myForm.controls['title'].invalid }"
+        />
+
+        <div
+          *ngIf="
+            myForm.controls['title'].invalid &&
+            (myForm.controls['title'].dirty || myForm.controls['title'].touched)
+          "
+        >
+          <small
+            [ngClass]="{ 'is-invalid': myForm.controls['title'].invalid }"
+            *ngIf="myForm.controls['title'].errors?.['required']"
+            >Title is required.</small
+          >
+          <small
+            [ngClass]="{ 'is-invalid': myForm.controls['description'].invalid }"
+            *ngIf="myForm.controls['title'].errors?.['minlength']"
+            >Title must be at least 3 characters long.</small
+          >
+        </div>
+      </div>
+
+      <div class="input-wrapper">
+        <label for="description">Description</label>
+        <input formControlName="description" id="description" type="text" />
+
+        <div
+          *ngIf="
+            myForm.controls['description'].invalid &&
+            (myForm.controls['description'].dirty ||
+              myForm.controls['description'].touched)
+          "
+        >
+          <small
+            [ngClass]="{ 'is-invalid': myForm.controls['description'].invalid }"
+            *ngIf="myForm.controls['description'].errors?.['required']"
+            >Description is required.</small
+          >
+          <small
+            [ngClass]="{ 'is-invalid': myForm.controls['description'].invalid }"
+            *ngIf="myForm.controls['description'].errors?.['minlength']"
+            >Description must be at least 3 characters long.</small
+          >
+        </div>
+      </div>
+
+      <div class="input-wrapper">
+        <label for="date">Date event</label>
+        <input formControlName="date" id="email" type="date" />
+
+        <div
+          *ngIf="
+            myForm.controls['date'].invalid &&
+            (myForm.controls['date'].dirty || myForm.controls['date'].touched)
+          "
+        >
+          <small
+            [ngClass]="{ 'is-invalid': myForm.controls['date'].invalid }"
+            *ngIf="myForm.controls['date'].errors?.['required']"
+            >Date is required.</small
+          >
+        </div>
+      </div>
+
+      <div class="input-wrapper">
+        <label for="name">Author name</label>
+        <input
+          formControlName="author"
+          id="name"
+          type="text"
+          [ngClass]="{ 'is-invalid': myForm.controls['author'].invalid }"
+        />
+
+        <div
+          *ngIf="
+            myForm.controls['author'].invalid &&
+            (myForm.controls['author'].dirty ||
+              myForm.controls['author'].touched)
+          "
+        >
+          <small
+            [ngClass]="{ 'is-invalid': myForm.controls['author'].invalid }"
+            *ngIf="myForm.controls['author'].errors?.['required']"
+            >Name is required.</small
+          >
+          <small
+            [ngClass]="{ 'is-invalid': myForm.controls['author'].invalid }"
+            *ngIf="myForm.controls['author'].errors?.['minlength']"
+            >Name must be at least 3 characters long.</small
+          >
+        </div>
+      </div>
+
+      <button [disabled]="myForm.invalid" type="submit">Create</button>
+    </form>
+  </div>
+</div>
