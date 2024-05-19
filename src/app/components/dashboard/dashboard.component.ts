@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
 
   public eventsList: Event[] = [];
   public currentPage = 1;
-  public eventsPerPage = 9;
+  public eventsPerPage = 6;
   public totalPages!: number;
   public eventsOnPage!: any[];
   public loading: boolean = false;

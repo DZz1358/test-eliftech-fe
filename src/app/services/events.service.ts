@@ -24,4 +24,8 @@ export class EventsService {
     return this.http.post(`${this.apiUrl}/event/${data.eventId}/add-attendee`, data);
   }
 
+  getEvent(id: string): Observable<Event> {
+    return this.http.get<Event>(`${this.apiUrl}/event/${id}`);
+  }
+
 }

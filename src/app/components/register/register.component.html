@@ -49,6 +49,11 @@
             *ngIf="myForm.controls['email'].errors?.['required']"
             >Email is required or not correct.</small
           >
+          <small
+            [ngClass]="{ 'is-invalid': myForm.controls['email'].invalid }"
+            *ngIf="myForm.controls['email'].errors?.['pattern']"
+            >Invalid email format.</small
+          >
         </div>
       </div>
 

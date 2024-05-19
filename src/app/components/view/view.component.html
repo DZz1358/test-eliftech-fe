@@ -1,1 +1,46 @@
-<p>view works!</p>
+<div class="container">
+  <div class="head-wrapper">
+    <h1>{{ event?.title }}</h1>
+    <button [routerLink]="['/dashboard']">Back</button>
+  </div>
+
+  <div class="events-wrapper" *ngIf="!loading">
+    <div class="card about-event">
+      <h3>Event info</h3>
+      <p><strong>Event description:</strong> {{ event?.description }}</p>
+      <p>
+        <strong>Event author:</strong> {{ event?.author ? event.author : "-" }}
+      </p>
+      <p>
+        <strong>Event date:</strong
+        >{{ event?.createdAt | date : "EEEE, MMMM d, y" }}
+      </p>
+    </div>
+
+    <div class="attendees-wrapper">
+      <ng-container
+        *ngIf="
+          event && event.attendees && event.attendees.length > 0;
+          else emptyList
+        "
+      >
+        <div *ngFor="let user of event?.attendees" class="card">
+          <p>{{ user.name }}</p>
+          <p>{{ user.email }}</p>
+        </div>
+      </ng-container>
+
+      <ng-template #emptyList>
+        <div class="empty">
+          <h2>Attendees list is empty</h2>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <ng-container *ngIf="loading">
+    <div class="loader-wrapper">
+      <div class="loader"></div>
+    </div>
+  </ng-container>
+</div>
